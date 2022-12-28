@@ -1,6 +1,6 @@
-{ config, pkgs, lib, system, flake, rosettaPkgs }: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    nixpkgs-fmt
-    vim
+#    nixpkgs-fmt
+#    vim
   ];
 }
