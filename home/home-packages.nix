@@ -4,12 +4,16 @@
 		_1password-gui
 		brave
 		colima
+		discord
 		htop
+		iterm2
 		jetbrains.idea-ultimate
+		jetbrains-mono
 		jq
 		kotlin
 		kubectl
 		kubernetes-helm
+		spotify
 		temurin-bin
 		terraform
 	];

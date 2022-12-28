@@ -6,7 +6,7 @@
     enable = true;
     userName = flake.config.people.users.${config.home.username}.name;
     userEmail = flake.config.people.users.${config.home.username}.email;
-    ignores = ["**/.idea" "**/.fleet" "**/." "**/.terraform" ];
+    ignores = [".DS_Store" "**/.idea" "**/.vscode" "**/.terraform" ];
     extraConfig = {
 			init.defaultBranch = "main"; # based.
 			core.editor = "vim";
