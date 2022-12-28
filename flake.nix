@@ -16,7 +16,7 @@
     in
     {
       darwinConfigurations = {
-        default = darwin.lib.darwinSystem {
+        Steffens-MBP = darwin.lib.darwinSystem {
           system = "x86_64-darwin";
           modules = [
             ./system
