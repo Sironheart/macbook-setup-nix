@@ -7,16 +7,18 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+#    gitignore.url = "github:hercules-ci/gitignore.nix";
   };
 
-  outputs = inputs@{ self, home-manager, nixpkgs, darwin, ... }:
+  outputs = inputs@{ self, home-manager, nixpkgs, darwin, /*gitignore,*/ ... }:
     let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      supportedSystems = [ "x86_64-darwin" "aarch64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+#      inherit (gitignore.lib) gitignoreSource;
     in
     {
       darwinConfigurations = {
-        Steffens-MBP = darwin.lib.darwinSystem {
+        private-macbook = darwin.lib.darwinSystem {
           system = "x86_64-darwin";
           modules = [
             ./system
