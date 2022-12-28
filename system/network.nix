@@ -1,3 +1,3 @@
 { pkgs, ... }: {
-	networking.hostName = "private-macbook";
+  networking.hostName = "private-macbook";
 }

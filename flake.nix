@@ -9,34 +9,30 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, home-manager, nixpkgs, darwin, ... }: {
-    inputs.flake-parts.lib.mkFlake { inherit (inputs) self; } {
-      systems = [ "x86_64-darwin" ];
-      imports = [
-        ./config
-        ./home
-      ];
-
-      flake = {
-      	darwinConfigurations = {
-					default = self.lib.mkMacosSystem {
-						imports = [
-							self.darwinModules.default
-						]
-					};
-      	};
+  outputs = inputs@{ self, home-manager, nixpkgs, darwin, ... }:
+    let
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+    in
+    {
+      darwinConfigurations = {
+        default = darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          modules = [
+            ./system
+            home-manager.darwinModules.default
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.steffen = import ./home;
+            }
+          ];
+        };
       };
-    };
-  };
 
-	perSystem = { pkgs, config, inputs', ... }: {
-		devShells.default = pkgs.mkShell {
-			buildInputs = [
-				pkgs.nixpkgs-fmt
-				inputs'.agenix.packages.agenix
-			];
-		};
-		formatter = pkgs.nixpkgs-fmt;
-		apps.default = config.apps.activate;
-	};
+      formatter = forAllSystems (
+        system:
+        nixpkgs.legacyPackages.${system}.nixpkgs-fmt
+      );
+    };
 }
