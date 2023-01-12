@@ -2,9 +2,7 @@
   home.packages = with pkgs; [
     _1password
     colima
-    discord
     htop
-    jetbrains-mono
     jq
     kotlin
     kubectl
