@@ -4,6 +4,7 @@
     colima
     htop
     jq
+    k9s
     kotlin
     kubectl
     kubernetes-helm
