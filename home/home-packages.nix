@@ -5,6 +5,7 @@
     htop
     jq
     k9s
+    k3sup
     kotlin
     kubectl
     kubernetes-helm
